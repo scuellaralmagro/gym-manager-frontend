@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ""
+    ports:
+      - "3000:80"
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
+    name: ${BACKEND_DOCKER_NETWORK:-backend_gym_manager_network}
