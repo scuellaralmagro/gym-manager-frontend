@@ -51,8 +51,8 @@ type PerfilResponse = {
  *
  * @remarks
  * Maneja el formulario de email y contraseña con React Hook Form. Lanza
- * `GET /sanctum/csrf-cookie` , `POST /api/login` y `GET /api/perfil`; después
- * guarda token y usuario en Zustand y redirige según el rol.
+ * `POST /api/login` y `GET /api/perfil`; después guarda token y usuario en
+ * Zustand y redirige según el rol.
  */
 export default function Login() {
   const navigate = useNavigate();
@@ -70,9 +70,6 @@ export default function Login() {
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      // Precargamos la cookie XSRF-TOKEN antes del POST para evitar el error 419 (CSRF token mismatch).
-      await api.get("/sanctum/csrf-cookie");
-
       const { data: loginData } = await api.post<{ token: string }>(
         "/api/login",
         values,
